@@ -30,8 +30,10 @@ if ( isset( $field['config']['civicrm_country'] ) ) {
 
 <?php ob_start(); ?>
 <script type="text/javascript">
-	jQuery( document ).ready( function( $ ) {
-		
+    // MTL Fix Start - CIH-14 - https://github.com/mecachisenros/cf-civicrm/issues/178
+	//jQuery( document ).ready( function( $ ) {
+    ( function( $ ) {
+    // MTL Fix End - CIH-14 - https://github.com/mecachisenros/cf-civicrm/issues/178
 		var countryFieldId = '<?php isset( $country_field ) ? esc_attr_e( $country_field['ID'] ) : print( 'false' ); ?>',
 		placeholder = '<?php echo esc_attr( $field['config']['placeholder'] ); ?>';
 
@@ -84,8 +86,10 @@ if ( isset( $field['config']['civicrm_country'] ) ) {
 				init( stateField ).val( defaultValue ).cfcSelect2();
 			}
 		} );
-
-	} );
+    // MTL Fix Start - CIH-14 - https://github.com/mecachisenros/cf-civicrm/issues/178
+	// } );
+    })(jQuery);
+    // MTL Fix End - CIH-14 - https://github.com/mecachisenros/cf-civicrm/issues/178
 </script>
 <?php
 	$script_template = ob_get_clean();
