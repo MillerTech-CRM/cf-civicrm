@@ -200,7 +200,11 @@ class CiviCRM_Caldera_Forms_Order_Processor {
 		}
 
 		$form_values['line_items'] = $line_items;
-
+        /* MTL Fix start - Zero total amount */
+        if(!isset($form_values['total_amount'])){
+          $form_values['total_amount'] = 0;
+        }
+        /* MTL Fix End - Zero total amount */
 		try {
 			$create_order = civicrm_api3( 'Order', 'create', $form_values );
 
